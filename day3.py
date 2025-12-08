@@ -4,16 +4,17 @@ def part1(inp: str) -> int:
 
     for bank in banks:
         bint = list(map(lambda x: int(x), bank))
-        start = max(bint[:len(bint) - 1])
+        start = max(bint[: len(bint) - 1])
         start_index = bint.index(start)
-        end = max(bint[start_index + 1:])
+        end = max(bint[start_index + 1 :])
         total += int(str(start) + str(end))
 
     return total
 
+
 def part2(inp: str) -> int:
     NUM_BATS = 12
-    
+
     banks = inp.split()
     total = 0
 
@@ -22,11 +23,11 @@ def part2(inp: str) -> int:
 
         bint = list(map(lambda x: int(x), bank))
         while len(to_add) < NUM_BATS:
-            start = max(bint[:len(bint) - (NUM_BATS - len(to_add) - 1)])
+            start = max(bint[: len(bint) - (NUM_BATS - len(to_add) - 1)])
             to_add.append(start)
-            bint = bint[bint.index(start) + 1:]
+            bint = bint[bint.index(start) + 1 :]
 
-        total += int(''.join(map(lambda x: str(x), to_add)))
+        total += int("".join(map(lambda x: str(x), to_add)))
 
     return total
 
@@ -47,11 +48,12 @@ def test():
     output = part2(INPUT)
     assert output == EXPECTED
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     test()
 
-    INPUT = __file__.split('.')[0] + '.txt'
-    with open(INPUT, 'r') as f:
+    INPUT = __file__.split(".")[0] + ".txt"
+    with open(INPUT, "r") as f:
         inp = f.read()
         print(part1(inp))
         print(part2(inp))

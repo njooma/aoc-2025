@@ -1,8 +1,11 @@
 def part1(inp: str) -> int:
-    ranges, ids = [x.split() for x in inp.split('\n\n')]
-    ranges = [range(int(start), int(end)+1) for (start, end) in [x.split('-') for x in ranges]]
+    ranges, ids = [x.split() for x in inp.split("\n\n")]
+    ranges = [
+        range(int(start), int(end) + 1)
+        for (start, end) in [x.split("-") for x in ranges]
+    ]
     ids = [int(x) for x in ids]
-    
+
     total = 0
     for id in ids:
         for r in ranges:
@@ -12,13 +15,14 @@ def part1(inp: str) -> int:
 
     return total
 
+
 def part2(inp: str) -> int:
-    ranges, _ = [x.split() for x in inp.split('\n\n')]
-    ranges = [(int(start), int(end)) for (start, end) in [x.split('-') for x in ranges]]
+    ranges, _ = [x.split() for x in inp.split("\n\n")]
+    ranges = [(int(start), int(end)) for (start, end) in [x.split("-") for x in ranges]]
     ranges = sorted(ranges, key=lambda x: x[0])
     first = ranges[0]
     ranges = ranges[1:]
-    
+
     number_line = [first]
     did_change = True
     while did_change:
@@ -35,13 +39,14 @@ def part2(inp: str) -> int:
                 nl[-1] = (s, end)
             else:
                 nl.append((start, end))
-        
+
         if nl == number_line:
             did_change = False
         number_line = nl
-        
-    total = sum([end-start+1 for (start, end) in number_line])
+
+    total = sum([end - start + 1 for (start, end) in number_line])
     return total
+
 
 def test():
     INPUT = """
@@ -66,11 +71,12 @@ def test():
     output = part2(INPUT)
     assert output == EXPECTED
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     test()
 
-    INPUT = __file__.split('.')[0] + '.txt'
-    with open(INPUT, 'r') as f:
+    INPUT = __file__.split(".")[0] + ".txt"
+    with open(INPUT, "r") as f:
         inp = f.read()
         print(part1(inp))
         print(part2(inp))

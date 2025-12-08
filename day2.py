@@ -9,29 +9,33 @@ def part1(inp: str) -> int:
         s_even = len(start) % 2 == 0
         e_even = len(end) % 2 == 0
         s_int, e_int = int(start), int(end)
-        print(start, end, end='\n\t')
-        
+        print(start, end, end="\n\t")
+
         if not s_even and not e_even and len(start) == len(end):
             print()
             continue
 
         if not s_even:
-            start = '1' + '0'*len(start)
+            start = "1" + "0" * len(start)
             s_int = int(start)
-        
+
         if s_int > e_int:
             print()
             continue
 
-        first_half = start[:(len(start) // 2)]
-        while int(first_half + first_half) >= s_int and int(first_half + first_half) <= e_int:
-            print(first_half + first_half, end='\n\t')
+        first_half = start[: (len(start) // 2)]
+        while (
+            int(first_half + first_half) >= s_int
+            and int(first_half + first_half) <= e_int
+        ):
+            print(first_half + first_half, end="\n\t")
             total += int(first_half + first_half)
             first_half = str(int(first_half) + 1)
         print()
-    
+
     print(total)
     return total
+
 
 def part1_bf(inp: str) -> int:
     inp = inp.split(",")
@@ -46,11 +50,12 @@ def part1_bf(inp: str) -> int:
         for i in range(s_int, e_int + 1):
             if i < 11:
                 continue
-            first_half = str(i)[:len(str(i)) // 2]
+            first_half = str(i)[: len(str(i)) // 2]
             if i == int(first_half + first_half):
                 total += i
 
     return total
+
 
 def part2(inp: str) -> int:
     inp = inp.split(",")
@@ -64,9 +69,9 @@ def part2(inp: str) -> int:
         for i in range(int(start), int(end) + 1):
             if i < 11:
                 continue
-            
+
             stri = str(i)
-        
+
             sqrt = int(len(stri) ** 0.5)
             factors = [1]
             for j in range(2, sqrt + 1):
@@ -78,8 +83,8 @@ def part2(inp: str) -> int:
             for factor in factors:
                 ll = len(stri) // factor
                 if i == int(stri[:factor] * ll):
-                    total += i      
-                    break          
+                    total += i
+                    break
 
     return total
 
@@ -97,11 +102,12 @@ def test():
     output = part2(INPUT)
     assert output == EXPECTED
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     test()
 
-    INPUT = __file__.split('.')[0] + '.txt'
-    with open(INPUT, 'r') as f:
+    INPUT = __file__.split(".")[0] + ".txt"
+    with open(INPUT, "r") as f:
         inp = f.read()
         print(part1_bf(inp))
         print(part2(inp))

@@ -3,29 +3,32 @@ from typing import Iterable
 from functools import reduce
 from operator import add, mul
 
+
 def calculate(operands: Iterable[int], operator: str):
-    if operator == '+':
+    if operator == "+":
         return sum(operands)
-    elif operator == '*':
+    elif operator == "*":
         return reduce(mul, operands)
 
+
 def part1(inp: str) -> int:
-    lines = [x.strip() for x in inp.strip().split('\n')]
+    lines = [x.strip() for x in inp.strip().split("\n")]
     operators = [x.strip() for x in lines[-1].split()]
     lines = lines[:-1]
-    lines = [[int(n) for n in re.findall(r'(\d+)\s*', x)] for x in lines]
-    
+    lines = [[int(n) for n in re.findall(r"(\d+)\s*", x)] for x in lines]
+
     total = 0
     for idx in range(len(operators)):
         total += calculate([x[idx] for x in lines], operators[idx])
-        
+
     return total
 
+
 def part2(inp: str) -> int:
-    lines = [x for x in inp.strip().split('\n')]
+    lines = [x for x in inp.strip().split("\n")]
     operators = [x.strip() for x in lines[-1].split()]
     lines = lines[:-1]
-    
+
     total = 0
     i = 0
     operands = []
@@ -41,6 +44,7 @@ def part2(inp: str) -> int:
 
     total += calculate(operands, operators[i])
     return total
+
 
 def test():
     INPUT = """
@@ -58,11 +62,12 @@ def test():
     output = part2(INPUT)
     assert output == EXPECTED
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     test()
 
-    INPUT = __file__.split('.')[0] + '.txt'
-    with open(INPUT, 'r') as f:
+    INPUT = __file__.split(".")[0] + ".txt"
+    with open(INPUT, "r") as f:
         inp = f.read()
         print(part1(inp))
         print(part2(inp))

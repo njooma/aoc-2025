@@ -1,8 +1,9 @@
 def parse_input(inp: str) -> int:
     ticks = int(inp[1:])
-    if inp[0] == 'L':
-        return ticks*-1
+    if inp[0] == "L":
+        return ticks * -1
     return ticks
+
 
 def part1(inp: str) -> int:
     inp = inp.split()
@@ -16,6 +17,7 @@ def part1(inp: str) -> int:
 
     return count
 
+
 def part2(inp: str) -> int:
     inp = inp.split()
     pos = 50
@@ -28,7 +30,9 @@ def part2(inp: str) -> int:
         num_rotations = abs(num_ticks) // 100
         count += num_rotations
 
-        additional_ticks = num_ticks - (num_rotations * 100 * (-1 if num_ticks < 0 else 1))
+        additional_ticks = num_ticks - (
+            num_rotations * 100 * (-1 if num_ticks < 0 else 1)
+        )
         pos += additional_ticks
         if not was_prev_zero and (pos <= 0 or pos > 99):
             count += 1
@@ -60,11 +64,12 @@ def test():
     count = part2(INPUT)
     assert count == EXPECTED
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     test()
-    
-    INPUT = __file__.split('.')[0] + '.txt'
-    with open(INPUT, 'r') as f:
+
+    INPUT = __file__.split(".")[0] + ".txt"
+    with open(INPUT, "r") as f:
         inp = f.read()
         print(part1(inp))
         print(part2(inp))
