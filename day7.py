@@ -53,7 +53,6 @@ def part2(inp: str) -> int:
                         (len(splitters) - i - 1, splitter + 1),
                         Node((len(splitters) - i - 1, splitter + 1)),
                     )
-                    curr.parent = parent
                     parent.left = curr
                     nodes[curr.id] = curr
                     nodes[parent.id] = parent
@@ -65,7 +64,6 @@ def part2(inp: str) -> int:
                         (len(splitters) - i - 1, splitter - 1),
                         Node((len(splitters) - i - 1, splitter - 1)),
                     )
-                    curr.parent = parent
                     parent.right = curr
                     nodes[curr.id] = curr
                     nodes[parent.id] = parent
